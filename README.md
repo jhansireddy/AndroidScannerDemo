@@ -1,2 +1,1 @@
 # AndroidScannerDemo
-# AndroidScannerDemo
