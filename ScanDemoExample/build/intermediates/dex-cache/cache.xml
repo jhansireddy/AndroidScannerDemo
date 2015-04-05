@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/jhansi/ScanDemoExample/app/build/intermediates/exploded-aar/ScanDemoExample/scanlibrary/unspecified/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="8946347ce350f0538ef051cb681f267f54743bfe">
+        <dex dex="/Users/jhansi/ScanDemoExample/app/build/intermediates/pre-dexed/debug/classes-720a062ced10028cb4958f93c8a28abf7700b0d0.jar" />
+    </item>
+    <item
+        jar="/Users/jhansi/ScanDemoExample/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/jhansi/ScanDemoExample/app/build/intermediates/pre-dexed/debug/classes-e19252929f842895d64e19dfdf30a5c1228c86dd.jar" />
+    </item>
+    <item
+        jar="/Users/jhansi/ScanDemoExample/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/jhansi/ScanDemoExample/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-0509f8e5ee77225540bea7a1afdbbf8b405f4cf1.jar" />
+    </item>
+    <item
+        jar="/Users/jhansi/ScanDemoExample/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/jhansi/ScanDemoExample/app/build/intermediates/pre-dexed/debug/classes-1f38c85cea53936aa54114f3f8963f1fe741077d.jar" />
+    </item>
+    <item
+        jar="/Users/jhansi/softwares/adt-bundle-mac-x86_64-20130729/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/Users/jhansi/ScanDemoExample/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-6b64ce22f89138bc3e47a24174d22c205085681c.jar" />
+    </item>
+
+</items>
