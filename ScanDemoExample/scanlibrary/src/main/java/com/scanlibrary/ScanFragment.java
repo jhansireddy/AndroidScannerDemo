@@ -35,6 +35,7 @@ public class ScanFragment extends Fragment {
     private View view;
     private ProgressDialogFragment progressDialogFragment;
     private IScanner scanner;
+    private Bitmap original;
 
     @Override
     public void onAttach(Activity activity) {
@@ -65,7 +66,7 @@ public class ScanFragment extends Fragment {
         sourceFrame.post(new Runnable() {
             @Override
             public void run() {
-                Bitmap original = getBitmap();
+                original = getBitmap();
                 if (original != null) {
                     setBitmap(original);
                 }
@@ -74,20 +75,25 @@ public class ScanFragment extends Fragment {
     }
 
     private Bitmap getBitmap() {
-        Uri uri = getArguments().getParcelable(ScanConstants.SELECTED_BITMAP);
+        Uri uri = getUri();
         try {
-            Bitmap original = Utils.getBitmap(getActivity(), uri);
-            return original;
+            Bitmap bitmap = Utils.getBitmap(getActivity(), uri);
+            getActivity().getContentResolver().delete(uri, null, null);
+            return bitmap;
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
 
+    private Uri getUri() {
+        Uri uri = getArguments().getParcelable(ScanConstants.SELECTED_BITMAP);
+        return uri;
+    }
+
     private void setBitmap(Bitmap original) {
         Bitmap scaledBitmap = scaledBitmap(original, sourceFrame.getWidth(), sourceFrame.getHeight());
         sourceImageView.setImageBitmap(scaledBitmap);
-        sourceImageView.setBackgroundColor(getResources().getColor(R.color.blue));
         Bitmap tempBitmap = ((BitmapDrawable) sourceImageView.getDrawable()).getBitmap();
         polygonView.setPoints(tempBitmap.getWidth(), tempBitmap.getHeight());
         polygonView.setVisibility(View.VISIBLE);
@@ -142,7 +148,6 @@ public class ScanFragment extends Fragment {
         @Override
         protected Bitmap doInBackground(Void... params) {
             try {
-                Bitmap original = getBitmap();
                 return scanBitmap(original);
             } catch (IOException e) {
                 e.printStackTrace();

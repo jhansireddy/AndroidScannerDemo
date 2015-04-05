@@ -22,6 +22,7 @@ public class ResultFragment extends Fragment {
     private View view;
     private ImageView scannedImageView;
     private Button doneButton;
+    private Bitmap original;
 
     public ResultFragment() {
     }
@@ -42,15 +43,22 @@ public class ResultFragment extends Fragment {
     }
 
     private Bitmap getBitmap() {
-        Uri uri = getArguments().getParcelable(ScanConstants.SCANNED_RESULT);
+        Uri uri = getUri();
         try {
-            Bitmap original = Utils.getBitmap(getActivity(), uri);
+            original = Utils.getBitmap(getActivity(), uri);
+            getActivity().getContentResolver().delete(uri, null, null);
             return original;
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
+
+    private Uri getUri() {
+        Uri uri = getArguments().getParcelable(ScanConstants.SCANNED_RESULT);
+        return uri;
+    }
+
 
     public void setScannedImage(Bitmap scannedImage) {
         scannedImageView.setImageBitmap(scannedImage);
@@ -60,11 +68,11 @@ public class ResultFragment extends Fragment {
         @Override
         public void onClick(View v) {
             Intent data = new Intent();
-            Bitmap bitmap = getBitmap();
-            Uri uri = Utils.getUri(getActivity(),bitmap);
+            Uri uri = Utils.getUri(getActivity(), original);
             data.putExtra(ScanConstants.SCANNED_RESULT, uri);
-            bitmap.recycle();
             getActivity().setResult(Activity.RESULT_OK, data);
+            original.recycle();
+            System.gc();
             getActivity().finish();
         }
     }
