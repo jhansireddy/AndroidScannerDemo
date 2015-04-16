@@ -21,7 +21,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by jhansi on 29/03/15.
@@ -95,7 +98,8 @@ public class ScanFragment extends Fragment {
         Bitmap scaledBitmap = scaledBitmap(original, sourceFrame.getWidth(), sourceFrame.getHeight());
         sourceImageView.setImageBitmap(scaledBitmap);
         Bitmap tempBitmap = ((BitmapDrawable) sourceImageView.getDrawable()).getBitmap();
-        polygonView.setPoints(tempBitmap.getWidth(), tempBitmap.getHeight());
+        Map<Integer, PointF> pointFs = getEdgePoints(tempBitmap);
+        polygonView.setPoints(pointFs);
         polygonView.setVisibility(View.VISIBLE);
         int padding = (int) getResources().getDimension(R.dimen.scanPadding);
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(tempBitmap.getWidth() + 2 * padding, tempBitmap.getHeight() + 2 * padding);
@@ -103,11 +107,69 @@ public class ScanFragment extends Fragment {
         polygonView.setLayoutParams(layoutParams);
     }
 
+    private Map<Integer, PointF> getEdgePoints(Bitmap tempBitmap) {
+        List<PointF> pointFs = getContourEdgePoints(tempBitmap);
+        Map<Integer, PointF> orderedPoints = orderedValidEdgePoints(tempBitmap, pointFs);
+        return orderedPoints;
+    }
+
+    private List<PointF> getContourEdgePoints(Bitmap tempBitmap) {
+        float[] points = ((ScanActivity) getActivity()).getPoints(tempBitmap);
+        float x1 = points[0];
+        float x2 = points[1];
+        float x3 = points[2];
+        float x4 = points[3];
+
+        float y1 = points[4];
+        float y2 = points[5];
+        float y3 = points[6];
+        float y4 = points[7];
+
+        List<PointF> pointFs = new ArrayList<>();
+        pointFs.add(new PointF(x1, y1));
+        pointFs.add(new PointF(x2, y2));
+        pointFs.add(new PointF(x3, y3));
+        pointFs.add(new PointF(x4, y4));
+        return pointFs;
+    }
+
+    private Map<Integer, PointF> getOutlinePoints(Bitmap tempBitmap) {
+        Map<Integer, PointF> outlinePoints = new HashMap<>();
+        outlinePoints.put(0, new PointF(0, 0));
+        outlinePoints.put(1, new PointF(tempBitmap.getWidth(), 0));
+        outlinePoints.put(2, new PointF(0, tempBitmap.getHeight()));
+        outlinePoints.put(3, new PointF(tempBitmap.getWidth(), tempBitmap.getHeight()));
+        return outlinePoints;
+    }
+
+    private Map<Integer, PointF> orderedValidEdgePoints(Bitmap tempBitmap, List<PointF> pointFs) {
+        Map<Integer, PointF> orderedPoints = polygonView.getOrderedPoints(pointFs);
+        if (!polygonView.isValidShape(orderedPoints)) {
+            orderedPoints = getOutlinePoints(tempBitmap);
+        }
+        return orderedPoints;
+    }
+
     private class ScanButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            new ScanAsyncTask().execute();
+            Map<Integer, PointF> points = polygonView.getPoints();
+            if (isScanPointsValid(points)) {
+                new ScanAsyncTask(points).execute();
+            } else {
+                showErrorDialog();
+            }
         }
+    }
+
+    private void showErrorDialog() {
+        SingleButtonDialogFragment fragment = new SingleButtonDialogFragment(R.string.ok, getString(R.string.cantCrop), "Error", true);
+        FragmentManager fm = getActivity().getFragmentManager();
+        fragment.show(fm, SingleButtonDialogFragment.class.toString());
+    }
+
+    private boolean isScanPointsValid(Map<Integer, PointF> points) {
+        return points.size() == 4;
     }
 
     private Bitmap scaledBitmap(Bitmap bitmap, int width, int height) {
@@ -116,11 +178,9 @@ public class ScanFragment extends Fragment {
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), m, true);
     }
 
-    private Bitmap scanBitmap(Bitmap original) throws IOException {
+    private Bitmap getScannedBitmap(Bitmap original, Map<Integer, PointF> points) {
         int width = original.getWidth();
         int height = original.getHeight();
-        List<PointF> points = polygonView.getPoints();
-
         float xRatio = (float) original.getWidth() / sourceImageView.getWidth();
         float yRatio = (float) original.getHeight() / sourceImageView.getHeight();
 
@@ -133,11 +193,17 @@ public class ScanFragment extends Fragment {
         float y3 = (points.get(2).y) * yRatio;
         float y4 = (points.get(3).y) * yRatio;
         Log.d("", "POints(" + x1 + "," + y1 + ")(" + x2 + "," + y2 + ")(" + x3 + "," + y3 + ")(" + x4 + "," + y4 + ")");
-        Bitmap _bitmap = ((ScanActivity) getActivity()).getScannedBitmap(width, height, original, x1, y1, x2, y2, x3, y3, x4, y4);
+        Bitmap _bitmap = ((ScanActivity) getActivity()).getScannedBitmap(original, x1, y1, x2, y2, x3, y3, x4, y4);
         return _bitmap;
     }
 
     private class ScanAsyncTask extends AsyncTask<Void, Void, Bitmap> {
+
+        private Map<Integer, PointF> points;
+
+        public ScanAsyncTask(Map<Integer, PointF> points) {
+            this.points = points;
+        }
 
         @Override
         protected void onPreExecute() {
@@ -147,12 +213,7 @@ public class ScanFragment extends Fragment {
 
         @Override
         protected Bitmap doInBackground(Void... params) {
-            try {
-                return scanBitmap(original);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
+            return getScannedBitmap(original, points);
         }
 
         @Override
