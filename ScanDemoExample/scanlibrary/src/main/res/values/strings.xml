@@ -7,4 +7,6 @@
     <string name="scanning">Scanning</string>
     <string name="done">Done</string>
     <string name="scan">Scan</string>
+    <string name="cantCrop">Cant crop the image, change the points</string>
+    <string name="ok">Ok</string>
 </resources>
