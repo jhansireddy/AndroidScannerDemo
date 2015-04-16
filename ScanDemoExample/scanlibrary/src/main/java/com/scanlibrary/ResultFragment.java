@@ -23,6 +23,11 @@ public class ResultFragment extends Fragment {
     private ImageView scannedImageView;
     private Button doneButton;
     private Bitmap original;
+    private Button originalButton;
+    private Button MagicColorButton;
+    private Button grayModeButton;
+    private Button bwButton;
+    private Bitmap transformed;
 
     public ResultFragment() {
     }
@@ -36,6 +41,14 @@ public class ResultFragment extends Fragment {
 
     private void init() {
         scannedImageView = (ImageView) view.findViewById(R.id.scannedImage);
+        originalButton = (Button) view.findViewById(R.id.original);
+        originalButton.setOnClickListener(new OriginalButtonClickListener());
+        MagicColorButton = (Button) view.findViewById(R.id.magicColor);
+        MagicColorButton.setOnClickListener(new MagicColorButtonClickListener());
+        grayModeButton = (Button) view.findViewById(R.id.grayMode);
+        grayModeButton.setOnClickListener(new GrayButtonClickListener());
+        bwButton = (Button) view.findViewById(R.id.BWMode);
+        bwButton.setOnClickListener(new BWButtonClickListener());
         Bitmap bitmap = getBitmap();
         setScannedImage(bitmap);
         doneButton = (Button) view.findViewById(R.id.doneButton);
@@ -59,7 +72,6 @@ public class ResultFragment extends Fragment {
         return uri;
     }
 
-
     public void setScannedImage(Bitmap scannedImage) {
         scannedImageView.setImageBitmap(scannedImage);
     }
@@ -68,12 +80,48 @@ public class ResultFragment extends Fragment {
         @Override
         public void onClick(View v) {
             Intent data = new Intent();
-            Uri uri = Utils.getUri(getActivity(), original);
+            Bitmap bitmap = transformed;
+            if (bitmap == null) {
+                bitmap = original;
+            }
+            Uri uri = Utils.getUri(getActivity(), bitmap);
             data.putExtra(ScanConstants.SCANNED_RESULT, uri);
             getActivity().setResult(Activity.RESULT_OK, data);
             original.recycle();
             System.gc();
             getActivity().finish();
+        }
+    }
+
+    private class BWButtonClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            transformed = ((ScanActivity) getActivity()).getBWBitmap(original);
+            scannedImageView.setImageBitmap(transformed);
+        }
+    }
+
+    private class MagicColorButtonClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            transformed = ((ScanActivity) getActivity()).getMagicColorBitmap(original);
+            scannedImageView.setImageBitmap(transformed);
+        }
+    }
+
+    private class OriginalButtonClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            transformed = original;
+            scannedImageView.setImageBitmap(original);
+        }
+    }
+
+    private class GrayButtonClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            transformed = ((ScanActivity) getActivity()).getGrayBitmap(original);
+            scannedImageView.setImageBitmap(transformed);
         }
     }
 
