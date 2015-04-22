@@ -11,7 +11,7 @@ ScanLibrary is an android document scanning library built on top of OpenCV, usin
 
 ## Videos
 
-<a href="https://www.youtube.com/watch?v=CXi0ylNQwtU"><img src="https://github.com/jhansireddy/AndroidScannerDemo/blob/master/ScanDemoExample/screenshots/scanPoints.png" alt="Sample Video" data-canonical-src="https://github.com/jhansireddy/AndroidScannerDemo/blob/master/ScanDemoExample/screenshots/scanPoints.png" style="max-width:100%;"></a>
+<a href="https://www.youtube.com/watch?v=Kl7rRZ79m6k"><img src="https://github.com/jhansireddy/AndroidScannerDemo/blob/master/ScanDemoExample/screenshots/scanPoints.png" alt="Sample Video" data-canonical-src="https://github.com/jhansireddy/AndroidScannerDemo/blob/master/ScanDemoExample/screenshots/scanPoints.png" style="max-width:100%;"></a>
 
 
 ## Using it in your project
