@@ -1,7 +1,7 @@
 # ScanLibrary
 ScanLibrary is an android document scanning library built on top of OpenCV, using the app you will be able to select the exact edges and crop the document accordingly from the selected 4 edges and change the perspective transformation of the cropped image.
 
-## Screenshots
+# Screenshots
 ![Camera Viewer](https://github.com/jhansireddy/AndroidScannerDemo/blob/master/ScanDemoExample/screenshots/scanPoints.png
  "Scan Points")
 ![Camera Viewer](https://github.com/jhansireddy/AndroidScannerDemo/blob/master/ScanDemoExample/screenshots/blackWhiteScannedResult.png
@@ -9,12 +9,11 @@ ScanLibrary is an android document scanning library built on top of OpenCV, usin
 ![Camera Viewer](https://github.com/jhansireddy/AndroidScannerDemo/blob/master/ScanDemoExample/screenshots/returned_scan_result.png
  "Scanned Result")
 
-## Videos
+# Videos
 
-<a href="https://www.youtube.com/watch?v=Kl7rRZ79m6k"><img src="https://github.com/jhansireddy/AndroidScannerDemo/blob/master/ScanDemoExample/screenshots/scanPoints.png" alt="Sample Video" data-canonical-src="https://github.com/jhansireddy/AndroidScannerDemo/blob/master/ScanDemoExample/screenshots/scanPoints.png" style="max-width:50%; max-height:50%"></a>
+[![ScreenShot](https://github.com/jhansireddy/AndroidScannerDemo/blob/master/ScanDemoExample/screenshots/scanPoints.png)](https://www.youtube.com/watch?v=Kl7rRZ79m6k)
 
-
-## Using it in your project
+# Using it in your project
 1. If you are using android studio, add the dependency to your main app build.gradle this way: 
 	    compile project(':scanlibrary')
 2. In your activity or fragment when you want to give an option of document scanning to user then:
