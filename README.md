@@ -20,19 +20,21 @@ ScanLibrary is an android document scanning library built on top of OpenCV, usin
 
 # Using it in your project
 1. If you are using android studio, add the dependency to your main app build.gradle this way: 
-	    compile project(':scanlibrary')
+```	    compile project(':scanlibrary')
+```
 2. In your activity or fragment when you want to give an option of document scanning to user then:
 Start the scanlibrary ScanActivity, with this the app will go to library, below is the sample code snippet:
+```
        int REQUEST_CODE = 99;
        int preference = ScanConstants.OPEN_CAMERA;
        Intent intent = new Intent(this, ScanActivity.class);
        intent.putExtra(ScanConstants.OPEN_INTENT_PREFERENCE, preference);
        startActivityForResult(intent, REQUEST_CODE);
-
+```
  Note: preference can be one of OPEN_CAMERA or OPEN_MEDIA or left empty, based on the passed preference the scan library decides to open camera or media or open the scan home page.
 
 3. Once the scanning is done, the application is returned from scan library to main app, to retrieve the scanned image, add onActivityResult in your activity or fragment from where you have started startActivityForResult, below is the sample code snippet:
-
+```
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -48,4 +50,5 @@ Start the scanlibrary ScanActivity, with this the app will go to library, below 
             }
         }
     }
+```
 4. IMPORTANT: This project uses the OPENCV Framework. Download the newest version here 'http://opencv.org/.
