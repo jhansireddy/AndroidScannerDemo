@@ -18,16 +18,17 @@ ScanLibrary is an android document scanning library built on top of OpenCV, usin
 
 
 <div align="center" >
-<a href="https://www.youtube.com/watch?v=Kl7rRZ79m6k" target="_blank"><img src="https://raw.githubusercontent.com/jhansireddy/AndroidScannerDemo/master/ScanDemoExample/screenshots/scanPoints.png" 
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=Kl7rRZ79m6k" target="_blank"><img src="https://raw.githubusercontent.com/jhansireddy/AndroidScannerDemo/master/ScanDemoExample/screenshots/scanPoints.png" 
 alt="Scan Video" width="40%" border="10" /></a>
 </div>
 
+
 # Using it in your project
-1. If you are using android studio, add the dependency to your main app build.gradle this way: 
+- If you are using android studio, add the dependency to your main app build.gradle this way: 
 ```	    
 compile project(':scanlibrary')
 ```
-2. In your activity or fragment when you want to give an option of document scanning to user then:
+- In your activity or fragment when you want to give an option of document scanning to user then:
 Start the scanlibrary ScanActivity, with this the app will go to library, below is the sample code snippet:
 Note: preference can be one of OPEN_CAMERA or OPEN_MEDIA or left empty, based on the passed preference the scan library decides to open camera or media or open the scan home page.
 ```java
@@ -38,7 +39,7 @@ Note: preference can be one of OPEN_CAMERA or OPEN_MEDIA or left empty, based on
        startActivityForResult(intent, REQUEST_CODE);
 ```
 
-3. Once the scanning is done, the application is returned from scan library to main app, to retrieve the scanned image, add onActivityResult in your activity or fragment from where you have started startActivityForResult, below is the sample code snippet:
+- Once the scanning is done, the application is returned from scan library to main app, to retrieve the scanned image, add onActivityResult in your activity or fragment from where you have started startActivityForResult, below is the sample code snippet:
 ```java
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -56,4 +57,4 @@ Note: preference can be one of OPEN_CAMERA or OPEN_MEDIA or left empty, based on
         }
     }
 ```
-4. IMPORTANT: This project uses the OPENCV Framework. Download the newest version here 'http://opencv.org/.
+- IMPORTANT: This project uses the OPENCV Framework. Download the newest version here 'http://opencv.org/.
