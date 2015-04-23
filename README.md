@@ -57,4 +57,4 @@ Note: preference can be one of OPEN_CAMERA or OPEN_MEDIA or left empty, based on
         }
     }
 ```
-- IMPORTANT: This project uses the OPENCV Framework. Download the newest version here 'http://opencv.org/.
+- **IMPORTANT:** This project uses the OPENCV Framework. Download the newest version here 'http://opencv.org/.
