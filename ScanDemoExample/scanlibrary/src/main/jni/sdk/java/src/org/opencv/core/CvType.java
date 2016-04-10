@@ -1,4 +1,4 @@
-package sdk.java.src.org.opencv.core;
+package org.opencv.core;
 
 public final class CvType {
 
@@ -25,11 +25,11 @@ public final class CvType {
 
     public static final int makeType(int depth, int channels) {
         if (channels <= 0 || channels >= CV_CN_MAX) {
-            throw new UnsupportedOperationException(
+            throw new java.lang.UnsupportedOperationException(
                     "Channels count should be 1.." + (CV_CN_MAX - 1));
         }
         if (depth < 0 || depth >= CV_DEPTH_MAX) {
-            throw new UnsupportedOperationException(
+            throw new java.lang.UnsupportedOperationException(
                     "Data type depth should be 0.." + (CV_DEPTH_MAX - 1));
         }
         return (depth & (CV_DEPTH_MAX - 1)) + ((channels - 1) << CV_CN_SHIFT);
@@ -77,53 +77,53 @@ public final class CvType {
 
     public static final int ELEM_SIZE(int type) {
         switch (depth(type)) {
-            case CV_8U:
-            case CV_8S:
-                return channels(type);
-            case CV_16U:
-            case CV_16S:
-                return 2 * channels(type);
-            case CV_32S:
-            case CV_32F:
-                return 4 * channels(type);
-            case CV_64F:
-                return 8 * channels(type);
-            default:
-                throw new UnsupportedOperationException(
-                        "Unsupported CvType value: " + type);
+        case CV_8U:
+        case CV_8S:
+            return channels(type);
+        case CV_16U:
+        case CV_16S:
+            return 2 * channels(type);
+        case CV_32S:
+        case CV_32F:
+            return 4 * channels(type);
+        case CV_64F:
+            return 8 * channels(type);
+        default:
+            throw new java.lang.UnsupportedOperationException(
+                    "Unsupported CvType value: " + type);
         }
     }
 
     public static final String typeToString(int type) {
         String s;
         switch (depth(type)) {
-            case CV_8U:
-                s = "CV_8U";
-                break;
-            case CV_8S:
-                s = "CV_8S";
-                break;
-            case CV_16U:
-                s = "CV_16U";
-                break;
-            case CV_16S:
-                s = "CV_16S";
-                break;
-            case CV_32S:
-                s = "CV_32S";
-                break;
-            case CV_32F:
-                s = "CV_32F";
-                break;
-            case CV_64F:
-                s = "CV_64F";
-                break;
-            case CV_USRTYPE1:
-                s = "CV_USRTYPE1";
-                break;
-            default:
-                throw new UnsupportedOperationException(
-                        "Unsupported CvType value: " + type);
+        case CV_8U:
+            s = "CV_8U";
+            break;
+        case CV_8S:
+            s = "CV_8S";
+            break;
+        case CV_16U:
+            s = "CV_16U";
+            break;
+        case CV_16S:
+            s = "CV_16S";
+            break;
+        case CV_32S:
+            s = "CV_32S";
+            break;
+        case CV_32F:
+            s = "CV_32F";
+            break;
+        case CV_64F:
+            s = "CV_64F";
+            break;
+        case CV_USRTYPE1:
+            s = "CV_USRTYPE1";
+            break;
+        default:
+            throw new java.lang.UnsupportedOperationException(
+                    "Unsupported CvType value: " + type);
         }
 
         int ch = channels(type);

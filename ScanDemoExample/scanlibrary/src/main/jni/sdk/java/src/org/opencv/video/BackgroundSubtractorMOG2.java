@@ -2,138 +2,349 @@
 //
 // This file is auto-generated. Please don't modify it!
 //
-package sdk.java.src.org.opencv.video;
+package org.opencv.video;
+
 
 
 // C++: class BackgroundSubtractorMOG2
-
-/**
- * <p>Gaussian Mixture-based Background/Foreground Segmentation Algorithm.</p>
- * <p/>
- * <p>Here are important members of the class that control the algorithm, which you
- * can set after constructing the class instance:</p>
- * <p/>
- * <p>Maximum allowed number of mixture components. Actual number is determined
- * dynamically per pixel.</p>
- * <p/>
- * <p>Threshold defining whether the component is significant enough to be included
- * into the background model (corresponds to <code>TB=1-cf</code> from the
- * paper??which paper??). <code>cf=0.1 => TB=0.9</code> is default. For
- * <code>alpha=0.001</code>, it means that the mode should exist for
- * approximately 105 frames before it is considered foreground.
- * <code></p>
- * <p/>
- * <p>// C++ code:</p>
- * <p/>
- * <p>Threshold for the squared Mahalanobis distance that helps decide when a
- * sample is close to the existing components (corresponds to <code>Tg</code>).
- * If it is not close to any component, a new component is generated. <code>3
- * sigma => Tg=3*3=9</code> is default. A smaller <code>Tg</code> value
- * generates more components. A higher <code>Tg</code> value may result in a
- * small number of components but they can grow too large.</p>
- * <p/>
- * <p>Initial variance for the newly generated components. It affects the speed of
- * adaptation. The parameter value is based on your estimate of the typical
- * standard deviation from the images. OpenCV uses 15 as a reasonable value.</p>
- * <p/>
- * <p>Parameter used to further control the variance.</p>
- * <p/>
- * <p>Parameter used to further control the variance.</p>
- * <p/>
- * <p>Complexity reduction parameter. This parameter defines the number of samples
- * needed to accept to prove the component exists. <code>CT=0.05</code> is a
- * default value for all the samples. By setting <code>CT=0</code> you get an
- * algorithm very similar to the standard Stauffer&Grimson algorithm.</p>
- * <p/>
- * <p>The value for marking shadow pixels in the output foreground mask. Default
- * value is 127.</p>
- * <p/>
- * <p>Shadow threshold. The shadow is detected if the pixel is a darker version of
- * the background. <code>Tau</code> is a threshold defining how much darker the
- * shadow can be. <code>Tau= 0.5</code> means that if a pixel is more than twice
- * darker then it is not shadow. See Prati,Mikic,Trivedi,Cucchiarra, *Detecting
- * Moving Shadows...*, IEEE PAMI,2003.</p>
- * <p/>
- * <p>The class implements the Gaussian mixture model background subtraction
- * described in: </code></p>
- * <ul>
- * <li> Z.Zivkovic, *Improved adaptive Gausian mixture model for background
- * subtraction*, International Conference Pattern Recognition, UK, August, 2004,
- * http://www.zoranz.net/Publications/zivkovic2004ICPR.pdf. The code is very
- * fast and performs also shadow detection. Number of Gausssian components is
- * adapted per pixel.
- * <li> Z.Zivkovic, F. van der Heijden, *Efficient Adaptive Density Estimapion
- * per Image Pixel for the Task of Background Subtraction*, Pattern Recognition
- * Letters, vol. 27, no. 7, pages 773-780, 2006. The algorithm similar to the
- * standard Stauffer&Grimson algorithm with additional selection of the number
- * of the Gaussian components based on: Z.Zivkovic, F.van der Heijden, Recursive
- * unsupervised learning of finite mixture models, IEEE Trans. on Pattern
- * Analysis and Machine Intelligence, vol.26, no.5, pages 651-656, 2004.
- * </ul>
- *
- * @see <a href="http://docs.opencv.org/modules/video/doc/motion_analysis_and_object_tracking.html#backgroundsubtractormog2">org.opencv.video.BackgroundSubtractorMOG2 : public BackgroundSubtractor</a>
- */
+//javadoc: BackgroundSubtractorMOG2
 public class BackgroundSubtractorMOG2 extends BackgroundSubtractor {
 
-    protected BackgroundSubtractorMOG2(long addr) {
-        super(addr);
+    protected BackgroundSubtractorMOG2(long addr) { super(addr); }
+
+
+    //
+    // C++:  bool getDetectShadows()
+    //
+
+    //javadoc: BackgroundSubtractorMOG2::getDetectShadows()
+    public  boolean getDetectShadows()
+    {
+        
+        boolean retVal = getDetectShadows_0(nativeObj);
+        
+        return retVal;
     }
 
 
     //
-    // C++:   BackgroundSubtractorMOG2::BackgroundSubtractorMOG2()
+    // C++:  double getBackgroundRatio()
     //
 
-    /**
-     * <p>The constructors.</p>
-     *
-     * @see <a href="http://docs.opencv.org/modules/video/doc/motion_analysis_and_object_tracking.html#backgroundsubtractormog2-backgroundsubtractormog2">org.opencv.video.BackgroundSubtractorMOG2.BackgroundSubtractorMOG2</a>
-     */
-    public BackgroundSubtractorMOG2() {
+    //javadoc: BackgroundSubtractorMOG2::getBackgroundRatio()
+    public  double getBackgroundRatio()
+    {
+        
+        double retVal = getBackgroundRatio_0(nativeObj);
+        
+        return retVal;
+    }
 
-        super(BackgroundSubtractorMOG2_0());
 
+    //
+    // C++:  double getComplexityReductionThreshold()
+    //
+
+    //javadoc: BackgroundSubtractorMOG2::getComplexityReductionThreshold()
+    public  double getComplexityReductionThreshold()
+    {
+        
+        double retVal = getComplexityReductionThreshold_0(nativeObj);
+        
+        return retVal;
+    }
+
+
+    //
+    // C++:  double getShadowThreshold()
+    //
+
+    //javadoc: BackgroundSubtractorMOG2::getShadowThreshold()
+    public  double getShadowThreshold()
+    {
+        
+        double retVal = getShadowThreshold_0(nativeObj);
+        
+        return retVal;
+    }
+
+
+    //
+    // C++:  double getVarInit()
+    //
+
+    //javadoc: BackgroundSubtractorMOG2::getVarInit()
+    public  double getVarInit()
+    {
+        
+        double retVal = getVarInit_0(nativeObj);
+        
+        return retVal;
+    }
+
+
+    //
+    // C++:  double getVarMax()
+    //
+
+    //javadoc: BackgroundSubtractorMOG2::getVarMax()
+    public  double getVarMax()
+    {
+        
+        double retVal = getVarMax_0(nativeObj);
+        
+        return retVal;
+    }
+
+
+    //
+    // C++:  double getVarMin()
+    //
+
+    //javadoc: BackgroundSubtractorMOG2::getVarMin()
+    public  double getVarMin()
+    {
+        
+        double retVal = getVarMin_0(nativeObj);
+        
+        return retVal;
+    }
+
+
+    //
+    // C++:  double getVarThreshold()
+    //
+
+    //javadoc: BackgroundSubtractorMOG2::getVarThreshold()
+    public  double getVarThreshold()
+    {
+        
+        double retVal = getVarThreshold_0(nativeObj);
+        
+        return retVal;
+    }
+
+
+    //
+    // C++:  double getVarThresholdGen()
+    //
+
+    //javadoc: BackgroundSubtractorMOG2::getVarThresholdGen()
+    public  double getVarThresholdGen()
+    {
+        
+        double retVal = getVarThresholdGen_0(nativeObj);
+        
+        return retVal;
+    }
+
+
+    //
+    // C++:  int getHistory()
+    //
+
+    //javadoc: BackgroundSubtractorMOG2::getHistory()
+    public  int getHistory()
+    {
+        
+        int retVal = getHistory_0(nativeObj);
+        
+        return retVal;
+    }
+
+
+    //
+    // C++:  int getNMixtures()
+    //
+
+    //javadoc: BackgroundSubtractorMOG2::getNMixtures()
+    public  int getNMixtures()
+    {
+        
+        int retVal = getNMixtures_0(nativeObj);
+        
+        return retVal;
+    }
+
+
+    //
+    // C++:  int getShadowValue()
+    //
+
+    //javadoc: BackgroundSubtractorMOG2::getShadowValue()
+    public  int getShadowValue()
+    {
+        
+        int retVal = getShadowValue_0(nativeObj);
+        
+        return retVal;
+    }
+
+
+    //
+    // C++:  void setBackgroundRatio(double ratio)
+    //
+
+    //javadoc: BackgroundSubtractorMOG2::setBackgroundRatio(ratio)
+    public  void setBackgroundRatio(double ratio)
+    {
+        
+        setBackgroundRatio_0(nativeObj, ratio);
+        
         return;
     }
 
 
     //
-    // C++:   BackgroundSubtractorMOG2::BackgroundSubtractorMOG2(int history, float varThreshold, bool bShadowDetection = true)
+    // C++:  void setComplexityReductionThreshold(double ct)
     //
 
-    /**
-     * <p>The constructors.</p>
-     *
-     * @param history          Length of the history.
-     * @param varThreshold     Threshold on the squared Mahalanobis distance to decide
-     *                         whether it is well described by the background model (see Cthr??). This
-     *                         parameter does not affect the background update. A typical value could be 4
-     *                         sigma, that is, <code>varThreshold=4*4=16;</code> (see Tb??).
-     * @param bShadowDetection Parameter defining whether shadow detection should be
-     *                         enabled (<code>true</code> or <code>false</code>).
-     * @see <a href="http://docs.opencv.org/modules/video/doc/motion_analysis_and_object_tracking.html#backgroundsubtractormog2-backgroundsubtractormog2">org.opencv.video.BackgroundSubtractorMOG2.BackgroundSubtractorMOG2</a>
-     */
-    public BackgroundSubtractorMOG2(int history, float varThreshold, boolean bShadowDetection) {
-
-        super(BackgroundSubtractorMOG2_1(history, varThreshold, bShadowDetection));
-
+    //javadoc: BackgroundSubtractorMOG2::setComplexityReductionThreshold(ct)
+    public  void setComplexityReductionThreshold(double ct)
+    {
+        
+        setComplexityReductionThreshold_0(nativeObj, ct);
+        
         return;
     }
 
-    /**
-     * <p>The constructors.</p>
-     *
-     * @param history      Length of the history.
-     * @param varThreshold Threshold on the squared Mahalanobis distance to decide
-     *                     whether it is well described by the background model (see Cthr??). This
-     *                     parameter does not affect the background update. A typical value could be 4
-     *                     sigma, that is, <code>varThreshold=4*4=16;</code> (see Tb??).
-     * @see <a href="http://docs.opencv.org/modules/video/doc/motion_analysis_and_object_tracking.html#backgroundsubtractormog2-backgroundsubtractormog2">org.opencv.video.BackgroundSubtractorMOG2.BackgroundSubtractorMOG2</a>
-     */
-    public BackgroundSubtractorMOG2(int history, float varThreshold) {
 
-        super(BackgroundSubtractorMOG2_2(history, varThreshold));
+    //
+    // C++:  void setDetectShadows(bool detectShadows)
+    //
 
+    //javadoc: BackgroundSubtractorMOG2::setDetectShadows(detectShadows)
+    public  void setDetectShadows(boolean detectShadows)
+    {
+        
+        setDetectShadows_0(nativeObj, detectShadows);
+        
+        return;
+    }
+
+
+    //
+    // C++:  void setHistory(int history)
+    //
+
+    //javadoc: BackgroundSubtractorMOG2::setHistory(history)
+    public  void setHistory(int history)
+    {
+        
+        setHistory_0(nativeObj, history);
+        
+        return;
+    }
+
+
+    //
+    // C++:  void setNMixtures(int nmixtures)
+    //
+
+    //javadoc: BackgroundSubtractorMOG2::setNMixtures(nmixtures)
+    public  void setNMixtures(int nmixtures)
+    {
+        
+        setNMixtures_0(nativeObj, nmixtures);
+        
+        return;
+    }
+
+
+    //
+    // C++:  void setShadowThreshold(double threshold)
+    //
+
+    //javadoc: BackgroundSubtractorMOG2::setShadowThreshold(threshold)
+    public  void setShadowThreshold(double threshold)
+    {
+        
+        setShadowThreshold_0(nativeObj, threshold);
+        
+        return;
+    }
+
+
+    //
+    // C++:  void setShadowValue(int value)
+    //
+
+    //javadoc: BackgroundSubtractorMOG2::setShadowValue(value)
+    public  void setShadowValue(int value)
+    {
+        
+        setShadowValue_0(nativeObj, value);
+        
+        return;
+    }
+
+
+    //
+    // C++:  void setVarInit(double varInit)
+    //
+
+    //javadoc: BackgroundSubtractorMOG2::setVarInit(varInit)
+    public  void setVarInit(double varInit)
+    {
+        
+        setVarInit_0(nativeObj, varInit);
+        
+        return;
+    }
+
+
+    //
+    // C++:  void setVarMax(double varMax)
+    //
+
+    //javadoc: BackgroundSubtractorMOG2::setVarMax(varMax)
+    public  void setVarMax(double varMax)
+    {
+        
+        setVarMax_0(nativeObj, varMax);
+        
+        return;
+    }
+
+
+    //
+    // C++:  void setVarMin(double varMin)
+    //
+
+    //javadoc: BackgroundSubtractorMOG2::setVarMin(varMin)
+    public  void setVarMin(double varMin)
+    {
+        
+        setVarMin_0(nativeObj, varMin);
+        
+        return;
+    }
+
+
+    //
+    // C++:  void setVarThreshold(double varThreshold)
+    //
+
+    //javadoc: BackgroundSubtractorMOG2::setVarThreshold(varThreshold)
+    public  void setVarThreshold(double varThreshold)
+    {
+        
+        setVarThreshold_0(nativeObj, varThreshold);
+        
+        return;
+    }
+
+
+    //
+    // C++:  void setVarThresholdGen(double varThresholdGen)
+    //
+
+    //javadoc: BackgroundSubtractorMOG2::setVarThresholdGen(varThresholdGen)
+    public  void setVarThresholdGen(double varThresholdGen)
+    {
+        
+        setVarThresholdGen_0(nativeObj, varThresholdGen);
+        
         return;
     }
 
@@ -144,13 +355,78 @@ public class BackgroundSubtractorMOG2 extends BackgroundSubtractor {
     }
 
 
-    // C++:   BackgroundSubtractorMOG2::BackgroundSubtractorMOG2()
-    private static native long BackgroundSubtractorMOG2_0();
 
-    // C++:   BackgroundSubtractorMOG2::BackgroundSubtractorMOG2(int history, float varThreshold, bool bShadowDetection = true)
-    private static native long BackgroundSubtractorMOG2_1(int history, float varThreshold, boolean bShadowDetection);
+    // C++:  bool getDetectShadows()
+    private static native boolean getDetectShadows_0(long nativeObj);
 
-    private static native long BackgroundSubtractorMOG2_2(int history, float varThreshold);
+    // C++:  double getBackgroundRatio()
+    private static native double getBackgroundRatio_0(long nativeObj);
+
+    // C++:  double getComplexityReductionThreshold()
+    private static native double getComplexityReductionThreshold_0(long nativeObj);
+
+    // C++:  double getShadowThreshold()
+    private static native double getShadowThreshold_0(long nativeObj);
+
+    // C++:  double getVarInit()
+    private static native double getVarInit_0(long nativeObj);
+
+    // C++:  double getVarMax()
+    private static native double getVarMax_0(long nativeObj);
+
+    // C++:  double getVarMin()
+    private static native double getVarMin_0(long nativeObj);
+
+    // C++:  double getVarThreshold()
+    private static native double getVarThreshold_0(long nativeObj);
+
+    // C++:  double getVarThresholdGen()
+    private static native double getVarThresholdGen_0(long nativeObj);
+
+    // C++:  int getHistory()
+    private static native int getHistory_0(long nativeObj);
+
+    // C++:  int getNMixtures()
+    private static native int getNMixtures_0(long nativeObj);
+
+    // C++:  int getShadowValue()
+    private static native int getShadowValue_0(long nativeObj);
+
+    // C++:  void setBackgroundRatio(double ratio)
+    private static native void setBackgroundRatio_0(long nativeObj, double ratio);
+
+    // C++:  void setComplexityReductionThreshold(double ct)
+    private static native void setComplexityReductionThreshold_0(long nativeObj, double ct);
+
+    // C++:  void setDetectShadows(bool detectShadows)
+    private static native void setDetectShadows_0(long nativeObj, boolean detectShadows);
+
+    // C++:  void setHistory(int history)
+    private static native void setHistory_0(long nativeObj, int history);
+
+    // C++:  void setNMixtures(int nmixtures)
+    private static native void setNMixtures_0(long nativeObj, int nmixtures);
+
+    // C++:  void setShadowThreshold(double threshold)
+    private static native void setShadowThreshold_0(long nativeObj, double threshold);
+
+    // C++:  void setShadowValue(int value)
+    private static native void setShadowValue_0(long nativeObj, int value);
+
+    // C++:  void setVarInit(double varInit)
+    private static native void setVarInit_0(long nativeObj, double varInit);
+
+    // C++:  void setVarMax(double varMax)
+    private static native void setVarMax_0(long nativeObj, double varMax);
+
+    // C++:  void setVarMin(double varMin)
+    private static native void setVarMin_0(long nativeObj, double varMin);
+
+    // C++:  void setVarThreshold(double varThreshold)
+    private static native void setVarThreshold_0(long nativeObj, double varThreshold);
+
+    // C++:  void setVarThresholdGen(double varThresholdGen)
+    private static native void setVarThresholdGen_0(long nativeObj, double varThresholdGen);
 
     // native support for java finalize()
     private static native void delete(long nativeObj);
