@@ -1,4 +1,4 @@
-package sdk.java.src.org.opencv.core;
+package org.opencv.core;
 
 public class CvException extends RuntimeException {
 

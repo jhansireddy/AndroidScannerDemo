@@ -1,9 +1,10 @@
-package sdk.java.src.org.opencv.android;
+package org.opencv.android;
 
 /**
  * Installation callback interface.
  */
-public interface InstallCallbackInterface {
+public interface InstallCallbackInterface
+{
     /**
      * New package installation is required.
      */
@@ -15,21 +16,17 @@ public interface InstallCallbackInterface {
 
     /**
      * Target package name.
-     *
      * @return Return target package name.
      */
     public String getPackageName();
-
     /**
      * Installation is approved.
      */
     public void install();
-
     /**
      * Installation is canceled.
      */
     public void cancel();
-
     /**
      * Wait for package installation.
      */

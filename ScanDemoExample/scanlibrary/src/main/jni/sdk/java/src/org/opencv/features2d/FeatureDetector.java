@@ -2,58 +2,21 @@
 //
 // This file is auto-generated. Please don't modify it!
 //
-package sdk.java.src.org.opencv.features2d;
+package org.opencv.features2d;
 
 import java.lang.String;
+import java.util.ArrayList;
 import java.util.List;
-
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfKeyPoint;
 import org.opencv.utils.Converters;
 
 // C++: class javaFeatureDetector
-
-/**
- * <p>Abstract base class for 2D image feature detectors.</p>
- * <p/>
- * <p>class CV_EXPORTS FeatureDetector <code></p>
- * <p/>
- * <p>// C++ code:</p>
- * <p/>
- * <p/>
- * <p>public:</p>
- * <p/>
- * <p>virtual ~FeatureDetector();</p>
- * <p/>
- * <p>void detect(const Mat& image, vector<KeyPoint>& keypoints,</p>
- * <p/>
- * <p>const Mat& mask=Mat()) const;</p>
- * <p/>
- * <p>void detect(const vector<Mat>& images,</p>
- * <p/>
- * <p>vector<vector<KeyPoint> >& keypoints,</p>
- * <p/>
- * <p>const vector<Mat>& masks=vector<Mat>()) const;</p>
- * <p/>
- * <p>virtual void read(const FileNode&);</p>
- * <p/>
- * <p>virtual void write(FileStorage&) const;</p>
- * <p/>
- * <p>static Ptr<FeatureDetector> create(const string& detectorType);</p>
- * <p/>
- * <p>protected:...</p>
- * <p/>
- * <p>};</p>
- *
- * @see <a href="http://docs.opencv.org/modules/features2d/doc/common_interfaces_of_feature_detectors.html#featuredetector">org.opencv.features2d.FeatureDetector : public Algorithm</a>
- */
+//javadoc: javaFeatureDetector
 public class FeatureDetector {
 
     protected final long nativeObj;
-
-    protected FeatureDetector(long addr) {
-        nativeObj = addr;
-    }
+    protected FeatureDetector(long addr) { nativeObj = addr; }
 
 
     private static final int
@@ -74,7 +37,7 @@ public class FeatureDetector {
             SIMPLEBLOB = 9,
             DENSE = 10,
             BRISK = 11,
-            GRIDRETECTOR = 1000,
+            AKAZE = 12,
             GRID_FAST = GRIDDETECTOR + FAST,
             GRID_STAR = GRIDDETECTOR + STAR,
             GRID_SIFT = GRIDDETECTOR + SIFT,
@@ -86,6 +49,7 @@ public class FeatureDetector {
             GRID_SIMPLEBLOB = GRIDDETECTOR + SIMPLEBLOB,
             GRID_DENSE = GRIDDETECTOR + DENSE,
             GRID_BRISK = GRIDDETECTOR + BRISK,
+            GRID_AKAZE = GRIDDETECTOR + AKAZE,
             PYRAMID_FAST = PYRAMIDDETECTOR + FAST,
             PYRAMID_STAR = PYRAMIDDETECTOR + STAR,
             PYRAMID_SIFT = PYRAMIDDETECTOR + SIFT,
@@ -97,6 +61,7 @@ public class FeatureDetector {
             PYRAMID_SIMPLEBLOB = PYRAMIDDETECTOR + SIMPLEBLOB,
             PYRAMID_DENSE = PYRAMIDDETECTOR + DENSE,
             PYRAMID_BRISK = PYRAMIDDETECTOR + BRISK,
+            PYRAMID_AKAZE = PYRAMIDDETECTOR + AKAZE,
             DYNAMIC_FAST = DYNAMICDETECTOR + FAST,
             DYNAMIC_STAR = DYNAMICDETECTOR + STAR,
             DYNAMIC_SIFT = DYNAMICDETECTOR + SIFT,
@@ -107,165 +72,113 @@ public class FeatureDetector {
             DYNAMIC_HARRIS = DYNAMICDETECTOR + HARRIS,
             DYNAMIC_SIMPLEBLOB = DYNAMICDETECTOR + SIMPLEBLOB,
             DYNAMIC_DENSE = DYNAMICDETECTOR + DENSE,
-            DYNAMIC_BRISK = DYNAMICDETECTOR + BRISK;
+            DYNAMIC_BRISK = DYNAMICDETECTOR + BRISK,
+            DYNAMIC_AKAZE = DYNAMICDETECTOR + AKAZE;
 
 
     //
-    // C++: static javaFeatureDetector* javaFeatureDetector::create(int detectorType)
+    // C++:  bool empty()
     //
 
-    /**
-     * <p>Creates a feature detector by its name.</p>
-     * <p/>
-     * <p>The following detector types are supported:</p>
-     * <ul>
-     * <li> <code>"FAST"</code> -- "FastFeatureDetector"
-     * <li> <code>"STAR"</code> -- "StarFeatureDetector"
-     * <li> <code>"SIFT"</code> -- "SIFT" (nonfree module)
-     * <li> <code>"SURF"</code> -- "SURF" (nonfree module)
-     * <li> <code>"ORB"</code> -- "ORB"
-     * <li> <code>"BRISK"</code> -- "BRISK"
-     * <li> <code>"MSER"</code> -- "MSER"
-     * <li> <code>"GFTT"</code> -- "GoodFeaturesToTrackDetector"
-     * <li> <code>"HARRIS"</code> -- "GoodFeaturesToTrackDetector" with Harris
-     * detector enabled
-     * <li> <code>"Dense"</code> -- "DenseFeatureDetector"
-     * <li> <code>"SimpleBlob"</code> -- "SimpleBlobDetector"
-     * </ul>
-     * <p/>
-     * <p>Also a combined format is supported: feature detector adapter name
-     * (<code>"Grid"</code> -- "GridAdaptedFeatureDetector", <code>"Pyramid"</code>
-     * -- "PyramidAdaptedFeatureDetector") + feature detector name (see above), for
-     * example: <code>"GridFAST"</code>, <code>"PyramidSTAR"</code>.</p>
-     * <p/>
-     * <p>Note: When using the SIFT and SURF detector types be sure to add the
-     * following lines to your code</p>
-     * <ul>
-     * <li> Add an extra include: "#include <opencv2/nonfree/nonfree.hpp>"
-     * <li> Add an initialisation function at the start of your code:
-     * "initModules_nonfree();"
-     * </ul>
-     *
-     * @param detectorType Feature detector type.
-     * @see <a href="http://docs.opencv.org/modules/features2d/doc/common_interfaces_of_feature_detectors.html#featuredetector-create">org.opencv.features2d.FeatureDetector.create</a>
-     */
-    public static FeatureDetector create(int detectorType) {
-
-        FeatureDetector retVal = new FeatureDetector(create_0(detectorType));
-
+    //javadoc: javaFeatureDetector::empty()
+    public  boolean empty()
+    {
+        
+        boolean retVal = empty_0(nativeObj);
+        
         return retVal;
     }
 
 
     //
-    // C++:  void javaFeatureDetector::detect(Mat image, vector_KeyPoint& keypoints, Mat mask = Mat())
+    // C++: static javaFeatureDetector* create(int detectorType)
     //
 
-    /**
-     * <p>Detects keypoints in an image (first variant) or image set (second variant).</p>
-     *
-     * @param image     Image.
-     * @param keypoints The detected keypoints. In the second variant of the method
-     *                  <code>keypoints[i]</code> is a set of keypoints detected in <code>images[i]</code>.
-     * @param mask      Mask specifying where to look for keypoints (optional). It must
-     *                  be a 8-bit integer matrix with non-zero values in the region of interest.
-     * @see <a href="http://docs.opencv.org/modules/features2d/doc/common_interfaces_of_feature_detectors.html#featuredetector-detect">org.opencv.features2d.FeatureDetector.detect</a>
-     */
-    public void detect(Mat image, MatOfKeyPoint keypoints, Mat mask) {
+    //javadoc: javaFeatureDetector::create(detectorType)
+    public static FeatureDetector create(int detectorType)
+    {
+        
+        FeatureDetector retVal = new FeatureDetector(create_0(detectorType));
+        
+        return retVal;
+    }
+
+
+    //
+    // C++:  void detect(Mat image, vector_KeyPoint& keypoints, Mat mask = Mat())
+    //
+
+    //javadoc: javaFeatureDetector::detect(image, keypoints, mask)
+    public  void detect(Mat image, MatOfKeyPoint keypoints, Mat mask)
+    {
         Mat keypoints_mat = keypoints;
         detect_0(nativeObj, image.nativeObj, keypoints_mat.nativeObj, mask.nativeObj);
-
+        
         return;
     }
 
-    /**
-     * <p>Detects keypoints in an image (first variant) or image set (second variant).</p>
-     *
-     * @param image     Image.
-     * @param keypoints The detected keypoints. In the second variant of the method
-     *                  <code>keypoints[i]</code> is a set of keypoints detected in <code>images[i]</code>.
-     * @see <a href="http://docs.opencv.org/modules/features2d/doc/common_interfaces_of_feature_detectors.html#featuredetector-detect">org.opencv.features2d.FeatureDetector.detect</a>
-     */
-    public void detect(Mat image, MatOfKeyPoint keypoints) {
+    //javadoc: javaFeatureDetector::detect(image, keypoints)
+    public  void detect(Mat image, MatOfKeyPoint keypoints)
+    {
         Mat keypoints_mat = keypoints;
         detect_1(nativeObj, image.nativeObj, keypoints_mat.nativeObj);
-
+        
         return;
     }
 
 
     //
-    // C++:  void javaFeatureDetector::detect(vector_Mat images, vector_vector_KeyPoint& keypoints, vector_Mat masks = vector<Mat>())
+    // C++:  void detect(vector_Mat images, vector_vector_KeyPoint& keypoints, vector_Mat masks = std::vector<Mat>())
     //
 
-    /**
-     * <p>Detects keypoints in an image (first variant) or image set (second variant).</p>
-     *
-     * @param images    Image set.
-     * @param keypoints The detected keypoints. In the second variant of the method
-     *                  <code>keypoints[i]</code> is a set of keypoints detected in <code>images[i]</code>.
-     * @param masks     Masks for each input image specifying where to look for
-     *                  keypoints (optional). <code>masks[i]</code> is a mask for <code>images[i]</code>.
-     * @see <a href="http://docs.opencv.org/modules/features2d/doc/common_interfaces_of_feature_detectors.html#featuredetector-detect">org.opencv.features2d.FeatureDetector.detect</a>
-     */
-    public void detect(List<Mat> images, List<MatOfKeyPoint> keypoints, List<Mat> masks) {
+    //javadoc: javaFeatureDetector::detect(images, keypoints, masks)
+    public  void detect(List<Mat> images, List<MatOfKeyPoint> keypoints, List<Mat> masks)
+    {
         Mat images_mat = Converters.vector_Mat_to_Mat(images);
         Mat keypoints_mat = new Mat();
         Mat masks_mat = Converters.vector_Mat_to_Mat(masks);
         detect_2(nativeObj, images_mat.nativeObj, keypoints_mat.nativeObj, masks_mat.nativeObj);
         Converters.Mat_to_vector_vector_KeyPoint(keypoints_mat, keypoints);
+        keypoints_mat.release();
         return;
     }
 
-    /**
-     * <p>Detects keypoints in an image (first variant) or image set (second variant).</p>
-     *
-     * @param images    Image set.
-     * @param keypoints The detected keypoints. In the second variant of the method
-     *                  <code>keypoints[i]</code> is a set of keypoints detected in <code>images[i]</code>.
-     * @see <a href="http://docs.opencv.org/modules/features2d/doc/common_interfaces_of_feature_detectors.html#featuredetector-detect">org.opencv.features2d.FeatureDetector.detect</a>
-     */
-    public void detect(List<Mat> images, List<MatOfKeyPoint> keypoints) {
+    //javadoc: javaFeatureDetector::detect(images, keypoints)
+    public  void detect(List<Mat> images, List<MatOfKeyPoint> keypoints)
+    {
         Mat images_mat = Converters.vector_Mat_to_Mat(images);
         Mat keypoints_mat = new Mat();
         detect_3(nativeObj, images_mat.nativeObj, keypoints_mat.nativeObj);
         Converters.Mat_to_vector_vector_KeyPoint(keypoints_mat, keypoints);
+        keypoints_mat.release();
         return;
     }
 
 
     //
-    // C++:  bool javaFeatureDetector::empty()
+    // C++:  void read(String fileName)
     //
 
-    public boolean empty() {
-
-        boolean retVal = empty_0(nativeObj);
-
-        return retVal;
-    }
-
-
-    //
-    // C++:  void javaFeatureDetector::read(string fileName)
-    //
-
-    public void read(String fileName) {
-
+    //javadoc: javaFeatureDetector::read(fileName)
+    public  void read(String fileName)
+    {
+        
         read_0(nativeObj, fileName);
-
+        
         return;
     }
 
 
     //
-    // C++:  void javaFeatureDetector::write(string fileName)
+    // C++:  void write(String fileName)
     //
 
-    public void write(String fileName) {
-
+    //javadoc: javaFeatureDetector::write(fileName)
+    public  void write(String fileName)
+    {
+        
         write_0(nativeObj, fileName);
-
+        
         return;
     }
 
@@ -276,26 +189,25 @@ public class FeatureDetector {
     }
 
 
-    // C++: static javaFeatureDetector* javaFeatureDetector::create(int detectorType)
-    private static native long create_0(int detectorType);
 
-    // C++:  void javaFeatureDetector::detect(Mat image, vector_KeyPoint& keypoints, Mat mask = Mat())
-    private static native void detect_0(long nativeObj, long image_nativeObj, long keypoints_mat_nativeObj, long mask_nativeObj);
-
-    private static native void detect_1(long nativeObj, long image_nativeObj, long keypoints_mat_nativeObj);
-
-    // C++:  void javaFeatureDetector::detect(vector_Mat images, vector_vector_KeyPoint& keypoints, vector_Mat masks = vector<Mat>())
-    private static native void detect_2(long nativeObj, long images_mat_nativeObj, long keypoints_mat_nativeObj, long masks_mat_nativeObj);
-
-    private static native void detect_3(long nativeObj, long images_mat_nativeObj, long keypoints_mat_nativeObj);
-
-    // C++:  bool javaFeatureDetector::empty()
+    // C++:  bool empty()
     private static native boolean empty_0(long nativeObj);
 
-    // C++:  void javaFeatureDetector::read(string fileName)
+    // C++: static javaFeatureDetector* create(int detectorType)
+    private static native long create_0(int detectorType);
+
+    // C++:  void detect(Mat image, vector_KeyPoint& keypoints, Mat mask = Mat())
+    private static native void detect_0(long nativeObj, long image_nativeObj, long keypoints_mat_nativeObj, long mask_nativeObj);
+    private static native void detect_1(long nativeObj, long image_nativeObj, long keypoints_mat_nativeObj);
+
+    // C++:  void detect(vector_Mat images, vector_vector_KeyPoint& keypoints, vector_Mat masks = std::vector<Mat>())
+    private static native void detect_2(long nativeObj, long images_mat_nativeObj, long keypoints_mat_nativeObj, long masks_mat_nativeObj);
+    private static native void detect_3(long nativeObj, long images_mat_nativeObj, long keypoints_mat_nativeObj);
+
+    // C++:  void read(String fileName)
     private static native void read_0(long nativeObj, String fileName);
 
-    // C++:  void javaFeatureDetector::write(string fileName)
+    // C++:  void write(String fileName)
     private static native void write_0(long nativeObj, String fileName);
 
     // native support for java finalize()

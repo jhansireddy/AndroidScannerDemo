@@ -6,12 +6,13 @@
 #  Usage from an external project:
 #    In your CMakeLists.txt, add these lines:
 #
-#    FIND_PACKAGE(OpenCV REQUIRED)
-#    TARGET_LINK_LIBRARIES(MY_TARGET_NAME ${OpenCV_LIBS})
+#    find_package(OpenCV REQUIRED)
+#    include_directories(${OpenCV_INCLUDE_DIRS}) # Not needed for CMake >= 2.8.11
+#    target_link_libraries(MY_TARGET_NAME ${OpenCV_LIBS})
 #
 #    Or you can search for specific OpenCV modules:
 #
-#    FIND_PACKAGE(OpenCV REQUIRED core highgui)
+#    find_package(OpenCV REQUIRED core videoio)
 #
 #    If the module is found then OPENCV_<MODULE>_FOUND is set to TRUE.
 #
@@ -20,11 +21,11 @@
 #      - OpenCV_INCLUDE_DIRS             : The OpenCV include directories.
 #      - OpenCV_COMPUTE_CAPABILITIES     : The version of compute capability.
 #      - OpenCV_ANDROID_NATIVE_API_LEVEL : Minimum required level of Android API.
-#      - OpenCV_VERSION                  : The version of this OpenCV build: "2.4.11"
-#      - OpenCV_VERSION_MAJOR            : Major version part of OpenCV_VERSION: "2"
-#      - OpenCV_VERSION_MINOR            : Minor version part of OpenCV_VERSION: "4"
-#      - OpenCV_VERSION_PATCH            : Patch version part of OpenCV_VERSION: "11"
-#      - OpenCV_VERSION_TWEAK            : Tweak version part of OpenCV_VERSION: "0"
+#      - OpenCV_VERSION                  : The version of this OpenCV build: "3.1.0"
+#      - OpenCV_VERSION_MAJOR            : Major version part of OpenCV_VERSION: "3"
+#      - OpenCV_VERSION_MINOR            : Minor version part of OpenCV_VERSION: "1"
+#      - OpenCV_VERSION_PATCH            : Patch version part of OpenCV_VERSION: "0"
+#      - OpenCV_VERSION_STATUS           : Development status of this build: ""
 #
 #    Advanced variables:
 #      - OpenCV_SHARED                   : Use OpenCV as shared library
@@ -33,7 +34,9 @@
 #      - OpenCV_LIB_COMPONENTS           : Present OpenCV modules list
 #      - OpenCV_USE_MANGLED_PATHS        : Mangled OpenCV path flag
 #      - OpenCV_MODULES_SUFFIX           : The suffix for OpenCVModules-XXX.cmake file
-#      - OpenCV_HAVE_ANDROID_CAMERA      : Presence of Android native camera wrappers
+#
+#    Deprecated variables:
+#      - OpenCV_VERSION_TWEAK            : Always "0"
 #
 # ===================================================================================
 
@@ -57,6 +60,18 @@ if(NOT DEFINED OpenCV_MODULES_SUFFIX)
     string(REPLACE - _ OpenCV_MODULES_SUFFIX "_${ANDROID_NDK_ABI_NAME}")
   else()
     set(OpenCV_MODULES_SUFFIX "")
+  endif()
+endif()
+
+if("FALSE" STREQUAL "TRUE") # value is defined by package builder (use STREQUAL to comply new CMake policy CMP0012)
+  if(NOT TARGET ippicv)
+    if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/non-existed-path")
+      add_library(ippicv STATIC IMPORTED)
+      set_target_properties(ippicv PROPERTIES
+        IMPORTED_LINK_INTERFACE_LIBRARIES ""
+        IMPORTED_LOCATION "${CMAKE_CURRENT_LIST_DIR}/non-existed-path"
+      )
+    endif()
   endif()
 endif()
 
@@ -85,7 +100,7 @@ set(OpenCV_USE_NVCUVID  )
 if(ANDROID)
   set(OpenCV_ANDROID_NATIVE_API_LEVEL 8)
 else()
-  set(OpenCV_ANDROID_NATIVE_API_LEVEL 0)
+  set(OpenCV_ANDROID_NATIVE_API_LEVEL 8)
 endif()
 
 # Some additional settings are required if OpenCV is built as static libs
@@ -111,16 +126,12 @@ if(NOT WIN32 OR ANDROID)
   endif()
 endif()
 
-# Presence of Android native camera wrappers
-set(OpenCV_HAVE_ANDROID_CAMERA ON)
-
 # ======================================================
 # Include directories to add to the user project:
 # ======================================================
 
 # Provide the include directories to the caller
 set(OpenCV_INCLUDE_DIRS "${OpenCV_INSTALL_PATH}/sdk/native/jni/include/opencv;${OpenCV_INSTALL_PATH}/sdk/native/jni/include")
-include_directories(${OpenCV_INCLUDE_DIRS})
 
 # ======================================================
 # Link directories to add to the user project:
@@ -129,31 +140,33 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 # Provide the libs directories to the caller
 set(OpenCV_LIB_DIR_OPT  CACHE PATH "Path where release OpenCV libraries are located")
 set(OpenCV_LIB_DIR_DBG  CACHE PATH "Path where debug OpenCV libraries are located")
-set(OpenCV_3RDPARTY_LIB_DIR_OPT  CACHE PATH "Path where release 3rdpaty OpenCV dependencies are located")
-set(OpenCV_3RDPARTY_LIB_DIR_DBG  CACHE PATH "Path where debug 3rdpaty OpenCV dependencies are located")
+set(OpenCV_3RDPARTY_LIB_DIR_OPT "${OpenCV_INSTALL_PATH}/sdk/native/3rdparty/libs/mips" CACHE PATH "Path where release 3rdparty OpenCV dependencies are located")
+set(OpenCV_3RDPARTY_LIB_DIR_DBG "${OpenCV_INSTALL_PATH}/sdk/native/3rdparty/libs/mips" CACHE PATH "Path where debug 3rdparty OpenCV dependencies are located")
 mark_as_advanced(FORCE OpenCV_LIB_DIR_OPT OpenCV_LIB_DIR_DBG OpenCV_3RDPARTY_LIB_DIR_OPT OpenCV_3RDPARTY_LIB_DIR_DBG OpenCV_CONFIG_PATH)
 
 # ======================================================
 #  Version variables:
 # ======================================================
-SET(OpenCV_VERSION 2.4.11)
-SET(OpenCV_VERSION_MAJOR  2)
-SET(OpenCV_VERSION_MINOR  4)
-SET(OpenCV_VERSION_PATCH  11)
+SET(OpenCV_VERSION 3.1.0)
+SET(OpenCV_VERSION_MAJOR  3)
+SET(OpenCV_VERSION_MINOR  1)
+SET(OpenCV_VERSION_PATCH  0)
 SET(OpenCV_VERSION_TWEAK  0)
+SET(OpenCV_VERSION_STATUS "")
 
 # ====================================================================
 # Link libraries: e.g. opencv_core;opencv_imgproc; etc...
 # ====================================================================
 
-SET(OpenCV_LIB_COMPONENTS opencv_core;opencv_androidcamera;opencv_flann;opencv_imgproc;opencv_highgui;opencv_features2d;opencv_calib3d;opencv_photo;opencv_video;opencv_videostab;opencv_ts;opencv_ml;opencv_objdetect;opencv_ocl;opencv_superres;opencv_stitching;opencv_legacy;opencv_contrib;opencv_java)
+SET(OpenCV_LIB_COMPONENTS opencv_videostab;opencv_videoio;opencv_video;opencv_superres;opencv_stitching;opencv_shape;opencv_photo;opencv_objdetect;opencv_ml;opencv_imgproc;opencv_imgcodecs;opencv_highgui;opencv_flann;opencv_features2d;opencv_core;opencv_calib3d;opencv_java)
+list(REMOVE_ITEM OpenCV_LIB_COMPONENTS opencv_hal)
+SET(OpenCV_WORLD_COMPONENTS )
 
 # ==============================================================
 #  Extra include directories, needed by OpenCV 2 new structure
 # ==============================================================
 SET(OpenCV2_INCLUDE_DIRS "")
 if(OpenCV2_INCLUDE_DIRS)
-  include_directories(${OpenCV2_INCLUDE_DIRS})
   list(APPEND OpenCV_INCLUDE_DIRS ${OpenCV2_INCLUDE_DIRS})
 
   set(OpenCV_ADD_DEBUG_RELEASE FALSE)
@@ -163,6 +176,20 @@ if(OpenCV2_INCLUDE_DIRS)
     set(OpenCV_3RDPARTY_LIB_DIR_OPT "${OpenCV_3RDPARTY_LIB_DIR_OPT}/Release")
     set(OpenCV_3RDPARTY_LIB_DIR_DBG "${OpenCV_3RDPARTY_LIB_DIR_DBG}/Debug")
   endif()
+endif()
+
+if(NOT CMAKE_VERSION VERSION_LESS "2.8.11")
+  # Target property INTERFACE_INCLUDE_DIRECTORIES available since 2.8.11:
+  # * http://www.cmake.org/cmake/help/v2.8.11/cmake.html#prop_tgt:INTERFACE_INCLUDE_DIRECTORIES
+  foreach(__component ${OpenCV_LIB_COMPONENTS})
+    if(TARGET ${__component})
+      set_target_properties(
+          ${__component}
+          PROPERTIES
+          INTERFACE_INCLUDE_DIRECTORIES "${OpenCV_INCLUDE_DIRS}"
+      )
+    endif()
+  endforeach()
 endif()
 
 # ==============================================================
@@ -207,8 +234,8 @@ foreach(__cvcomponent ${OpenCV_FIND_COMPONENTS})
       message(WARNING "${__cvcomponent} is required but was not found")
     endif()
     #indicate that module is NOT found
-    string(TOUPPER "${__cvcomponent}" __cvcomponent)
-    set(${__cvcomponent}_FOUND "${__cvcomponent}_FOUND-NOTFOUND")
+    string(TOUPPER "${__cvcomponent}" __cvcomponentUP)
+    set(${__cvcomponentUP}_FOUND "${__cvcomponentUP}_FOUND-NOTFOUND")
   else()
     list(APPEND OpenCV_FIND_COMPONENTS_ ${__cvcomponent})
     # Not using list(APPEND) here, because OpenCV_LIBS may not exist yet.
@@ -216,8 +243,31 @@ foreach(__cvcomponent ${OpenCV_FIND_COMPONENTS})
     # to find_package(OpenCV) with different component lists add up.
     set(OpenCV_LIBS ${OpenCV_LIBS} "${__cvcomponent}")
     #indicate that module is found
-    string(TOUPPER "${__cvcomponent}" __cvcomponent)
-    set(${__cvcomponent}_FOUND 1)
+    string(TOUPPER "${__cvcomponent}" __cvcomponentUP)
+    set(${__cvcomponentUP}_FOUND 1)
+  endif()
+  if(OpenCV_SHARED AND ";${OpenCV_WORLD_COMPONENTS};" MATCHES ";${__cvcomponent};" AND NOT TARGET ${__cvcomponent})
+    get_target_property(__implib_dbg opencv_world IMPORTED_IMPLIB_DEBUG)
+    get_target_property(__implib_release opencv_world  IMPORTED_IMPLIB_RELEASE)
+    get_target_property(__location_dbg opencv_world IMPORTED_LOCATION_DEBUG)
+    get_target_property(__location_release opencv_world  IMPORTED_LOCATION_RELEASE)
+    add_library(${__cvcomponent} SHARED IMPORTED)
+    if(__location_dbg)
+      set_property(TARGET ${__cvcomponent} APPEND PROPERTY IMPORTED_CONFIGURATIONS DEBUG)
+      set_target_properties(${__cvcomponent} PROPERTIES
+        IMPORTED_IMPLIB_DEBUG "${__implib_dbg}"
+        IMPORTED_LINK_INTERFACE_LIBRARIES_DEBUG ""
+        IMPORTED_LOCATION_DEBUG "${__location_dbg}"
+      )
+    endif()
+    if(__location_release)
+      set_property(TARGET ${__cvcomponent} APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+      set_target_properties(${__cvcomponent} PROPERTIES
+        IMPORTED_IMPLIB_RELEASE "${__implib_release}"
+        IMPORTED_LINK_INTERFACE_LIBRARIES_RELEASE ""
+        IMPORTED_LOCATION_RELEASE "${__location_release}"
+      )
+    endif()
   endif()
 endforeach()
 set(OpenCV_FIND_COMPONENTS ${OpenCV_FIND_COMPONENTS_})
@@ -275,31 +325,15 @@ foreach(__opttype OPT DBG)
     set(OpenCV_CUDA_LIBS_RELPATH "")
     foreach(l ${OpenCV_CUDA_LIBS_ABSPATH})
       get_filename_component(_tmp ${l} PATH)
-      list(APPEND OpenCV_CUDA_LIBS_RELPATH ${_tmp})
+      if(NOT ${_tmp} MATCHES "-Wl.*")
+          list(APPEND OpenCV_CUDA_LIBS_RELPATH ${_tmp})
+      endif()
     endforeach()
 
     list(REMOVE_DUPLICATES OpenCV_CUDA_LIBS_RELPATH)
     link_directories(${OpenCV_CUDA_LIBS_RELPATH})
   endif()
 endforeach()
-
-# ==============================================================
-#  Android camera helper macro
-# ==============================================================
-if(OpenCV_HAVE_ANDROID_CAMERA)
-  macro(COPY_NATIVE_CAMERA_LIBS target)
-    get_target_property(target_location ${target} LOCATION)
-    get_filename_component(target_location "${target_location}" PATH)
-    file(GLOB camera_wrappers "${OpenCV_LIB_DIR_OPT}/libnative_camera_r*.so")
-    foreach(wrapper ${camera_wrappers})
-      add_custom_command(
-        TARGET ${target}
-        POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy "${wrapper}" "${target_location}"
-      )
-    endforeach()
-  endmacro()
-endif()
 
 # ==============================================================
 # Compatibility stuff
@@ -328,6 +362,7 @@ macro(ocv_check_dependencies)
   set(OCV_DEPENDENCIES_FOUND TRUE)
   foreach(d ${ARGN})
     if(NOT TARGET ${d})
+      message(WARNING "OpenCV: Can't resolve dependency: ${d}")
       set(OCV_DEPENDENCIES_FOUND FALSE)
       break()
     endif()
@@ -351,6 +386,14 @@ endfunction()
 
 macro(ocv_include_modules)
   include_directories(BEFORE "${OpenCV_INCLUDE_DIRS}")
+endmacro()
+
+macro(ocv_include_modules_recurse)
+  include_directories(BEFORE "${OpenCV_INCLUDE_DIRS}")
+endmacro()
+
+macro(ocv_target_link_libraries)
+  target_link_libraries(${ARGN})
 endmacro()
 
 # remove all matching elements from the list
