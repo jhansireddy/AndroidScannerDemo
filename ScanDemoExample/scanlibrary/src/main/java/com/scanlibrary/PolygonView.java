@@ -292,5 +292,57 @@ public class PolygonView extends FrameLayout {
 
     }
 
+    public void invalidate() {
 
+        if (pointer1.getX() > pointer4.getX() && pointer1.getY() > pointer4.getY()) {
+            ImageView tempImageView = pointer4;
+            pointer4 = pointer1;
+            pointer1 = tempImageView;
+        }
+
+        if (pointer2.getY() > pointer3.getY() && pointer2.getX() < pointer3.getX()) {
+            ImageView tempImageView = pointer3;
+            pointer3 = pointer2;
+            pointer2 = tempImageView;
+        }
+
+        if (pointer1.getX() > pointer4.getX()) {
+            ImageView tempImageView = pointer4;
+            pointer4 = pointer3;
+            pointer3 = tempImageView;
+        }
+
+        if (pointer1.getY() > pointer3.getY()) {
+            ImageView tempImageView = pointer3;
+            pointer3 = pointer1;
+            pointer1 = tempImageView;
+        }
+
+        if (pointer2.getY() > pointer4.getY()) {
+            ImageView tempImageView = pointer4;
+            pointer4 = pointer2;
+            pointer2 = tempImageView;
+        }
+
+
+        if (pointer1.getX() > pointer2.getX()) {
+            ImageView tempImageView = pointer2;
+            pointer2 = pointer1;
+            pointer1 = tempImageView;
+        }
+
+        if (pointer3.getX() > pointer4.getX()) {
+            ImageView tempImageView = pointer4;
+            pointer4 = pointer3;
+            pointer3 = tempImageView;
+        }
+
+
+        midPointer13.setOnTouchListener(new MidPointTouchListenerImpl(pointer1, pointer3));
+        midPointer12.setOnTouchListener(new MidPointTouchListenerImpl(pointer1, pointer2));
+        midPointer34.setOnTouchListener(new MidPointTouchListenerImpl(pointer3, pointer4));
+        midPointer24.setOnTouchListener(new MidPointTouchListenerImpl(pointer2, pointer4));
+
+        super.invalidate();
+    }
 }
