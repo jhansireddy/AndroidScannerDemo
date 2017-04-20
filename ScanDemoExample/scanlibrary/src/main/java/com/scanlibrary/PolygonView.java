@@ -238,7 +238,11 @@ public class PolygonView extends FrameLayout {
                 default:
                     break;
             }
-            polygonView.invalidate();
+            if (eid == MotionEvent.ACTION_MOVE) {
+                polygonView.superInvalidate();
+            }else {
+                polygonView.invalidate();
+            }
             return true;
         }
     }
@@ -343,6 +347,10 @@ public class PolygonView extends FrameLayout {
         midPointer34.setOnTouchListener(new MidPointTouchListenerImpl(pointer3, pointer4));
         midPointer24.setOnTouchListener(new MidPointTouchListenerImpl(pointer2, pointer4));
 
+        super.invalidate();
+    }
+    
+    public void superInvalidate() {
         super.invalidate();
     }
 }
