@@ -5,23 +5,22 @@ ScanLibrary is an android document scanning library built on top of OpenCV, usin
 
 <div align="center">
 
-		<img width="23%" src="https://raw.githubusercontent.com/jhansireddy/AndroidScannerDemo/master/ScanDemoExample/screenshots/scanInput.png" alt="Scan Input" title="Scan Input"</img>
-        <img height="0" width="8px">
-        <img width="23%" src="https://raw.githubusercontent.com/jhansireddy/AndroidScannerDemo/master/ScanDemoExample/screenshots/scanPoints.png" alt="Scan Points" title="Scan Input"</img>
-        <img height="0" width="8px">
-        <img width="23%"src="https://raw.githubusercontent.com/jhansireddy/AndroidScannerDemo/master/ScanDemoExample/screenshots/blackWhiteScannedResult.png" alt="After Scan" title="After Scan"></img>
-        <img height="0" width="8px">
-        <img width="23%" src="https://raw.githubusercontent.com/jhansireddy/AndroidScannerDemo/master/ScanDemoExample/screenshots/returned_scan_result.png" alt="Scanned Result" title="Scanned Result"></img>
+<img width="23%" src="https://raw.githubusercontent.com/jhansireddy/AndroidScannerDemo/master/ScanDemoExample/screenshots/scanInput.png" alt="Scan Input" title="Scan Input"></img>
+
+<img width="23%" src="https://raw.githubusercontent.com/jhansireddy/AndroidScannerDemo/master/ScanDemoExample/screenshots/scanPoints.png" alt="Scan Points" title="Scan Points"></img>
+
+<img width="23%" src="https://raw.githubusercontent.com/jhansireddy/AndroidScannerDemo/master/ScanDemoExample/screenshots/blackWhiteScannedResult.png" alt="After Scan" title="After Scan"></img>
+
+<img width="23%" src="https://raw.githubusercontent.com/jhansireddy/AndroidScannerDemo/master/ScanDemoExample/screenshots/returned_scan_result.png" alt="Scanned Result" title="Scanned Result"></img>
+
 </div>
 
 # Videos
-
 
 <div align="center" >
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=Kl7rRZ79m6k" target="_blank"><img src="https://raw.githubusercontent.com/jhansireddy/AndroidScannerDemo/master/ScanDemoExample/screenshots/scanPoints.png" 
 alt="Scan Video" width="40%" border="10" /></a>
 </div>
-
 
 # Using it in your project
 - If you are using android studio, add the dependency to your main app build.gradle this way: 
