@@ -2,3 +2,4 @@
 **/.gradle
 **/*.iml
 local.properties
+**/obj
