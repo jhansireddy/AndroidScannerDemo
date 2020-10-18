@@ -27,7 +27,12 @@ alt="Scan Video" width="40%" border="10" /></a>
 </div>
 
 # Using it in your project
-- If you are using android studio, add the dependency to your main app build.gradle this way: 
+
+* `git clone https://github.com/jhansireddy/AndroidScannerDemo.git` into a standalone dir;
+* Create or using your project: `File -> New -> Import module...`;
+* As source directory point to: `~/_dirWhereYouClonedAndroidScannerDemo_/AndroidScannerDemo/ScanDemoExample/scanlibrary` and confirm;
+
+- Add the dependency to your main app build.gradle this way: 
 ```	    
 compile project(':scanlibrary')
 ```
