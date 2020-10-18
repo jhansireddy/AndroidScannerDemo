@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.scanlibrary" >
-    <uses-sdk android:minSdkVersion="19" android:targetSdkVersion="28" />
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
@@ -21,7 +20,7 @@
         </activity>
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="com.scanlibrary.provider"
             android:exported="false"
             android:grantUriPermissions="true">
